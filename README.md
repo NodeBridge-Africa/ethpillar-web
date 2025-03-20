@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EthPillar - Ethereum Staking Simplified
+
+EthPillar is a modern web application that transforms Ethereum node management from complex terminal commands to intuitive clickable options. It helps users set up and manage their Ethereum nodes with confidence.
+
+## Features
+
+- **User-friendly Interface**: Simple dashboard for node management
+- **Real-time Monitoring**: Track node status and performance
+- **Client Selection**: Easy setup wizard for execution and consensus clients
+- **Security-focused**: Built with security best practices
+- **Ethereum 2.0 Support**: Compatible with the latest Ethereum protocols
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Runtime**: Bun
+- **Styling**: Tailwind CSS and Shadcn/UI
+- **Animations**: Framer Motion
+- **Component Structure**: Organized by page in the components directory
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
+```
+
+Then, run the development server:
+
+```bash
 bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── src/
+│   ├── app/           # App Router pages
+│   ├── components/    # UI components organized by page
+│   │   └── landing/   # Components for the landing page
+│   ├── styles/        # Global styles
+│   └── lib/           # Utility functions and shared logic
+```
+
+## Build for Production
+
+```bash
+bun run build
+```
+
+## Preview Production Build
+
+```bash
+bun start
+```
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Bun Documentation](https://bun.sh/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Ethereum Staking](https://ethereum.org/en/staking/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
