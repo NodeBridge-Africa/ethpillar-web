@@ -8,7 +8,8 @@
 
 # testing
 /coverage
-
+/docs
+.cursorrules
 # next.js
 /.next/
 /out/
