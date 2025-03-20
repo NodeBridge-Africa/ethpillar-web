@@ -132,7 +132,7 @@ export const Testimonials = () => {
 
                   {/* Testimonial content */}
                   <p className="text-slate-300 mb-6 flex-grow leading-relaxed">
-                    "{testimonial.content}"
+                    &ldquo;{testimonial.content}&rdquo;
                   </p>
 
                   {/* Author */}

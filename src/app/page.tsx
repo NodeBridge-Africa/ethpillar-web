@@ -12,7 +12,14 @@ import { useEffect, useState, useRef } from "react";
 // Add particlesJS type definition
 declare global {
   interface Window {
-    particlesJS: any;
+    particlesJS: (
+      id: string,
+      options: {
+        particles: object;
+        interactivity: object;
+        retina_detect: boolean;
+      }
+    ) => void;
   }
 }
 
