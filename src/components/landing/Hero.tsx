@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, Shield } from "lucide-react";
 
 export const Hero = () => {
   return (

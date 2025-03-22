@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NextRequest, NextResponse } from "next/server";
 import { connectionManager } from "../../lib/connectionManager";
 import { parseErrorMessage } from "../../lib/utils";

@@ -1,14 +1,7 @@
 "use client";
 
+import { Suspense } from "react";
 import { SSHAuthForm } from "@/components/auth/SSHAuthForm";
-import { Metadata } from "next";
-
-// Note: Metadata can only be exported from Server Components, so this won't work in a Client Component
-// We'll need to set this in layout.tsx instead if needed
-// export const metadata: Metadata = {
-//   title: "EthPillar - Server Authentication",
-//   description: "Connect to your Ethereum node server securely via SSH",
-// };
 
 export default function AuthPage() {
   return (
@@ -224,7 +217,15 @@ export default function AuthPage() {
               Connect to your Ethereum node server
             </p>
           </div>
-          <SSHAuthForm />
+          <Suspense
+            fallback={
+              <div className="text-center text-blue-300">
+                Loading authentication form...
+              </div>
+            }
+          >
+            <SSHAuthForm />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -13,10 +13,16 @@ import {
 import { Server } from "lucide-react";
 import Loading from "@/components/ui/loading";
 
+interface ConnectionInfo {
+  host: string;
+  port: number;
+  username: string;
+  authMethod: string;
+}
+
 export default function DashboardPage() {
   const router = useRouter();
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [userInfo, setUserInfo] = useState<any>(null);
+  const [userInfo, setUserInfo] = useState<ConnectionInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Check if user is authenticated

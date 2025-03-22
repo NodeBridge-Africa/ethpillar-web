@@ -10,14 +10,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft, Save, RefreshCw } from "lucide-react";
+import { ArrowLeft, RefreshCw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 
+interface ConnectionInfo {
+  host: string;
+  port: number;
+  username: string;
+  authMethod: string;
+}
+
 export default function SettingsPage() {
   const router = useRouter();
-  const [connectionInfo, setConnectionInfo] = useState<any>(null);
+  const [connectionInfo, setConnectionInfo] = useState<ConnectionInfo | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

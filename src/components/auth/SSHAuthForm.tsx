@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SSHAuthInput, sshAuthSchema } from "@/lib/schemas/auth";
-import { toast } from "@/hooks/use-toast";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +23,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -63,7 +61,7 @@ export function SSHAuthForm() {
   // Update the authMethod field when changing tabs
   const handleTabChange = (value: string) => {
     if (value === "password" || value === "privateKey") {
-      setActiveTab(value);
+      setActiveTab(value as "password" | "privateKey");
       form.setValue("authMethod", value);
     }
   };
@@ -203,7 +201,7 @@ export function SSHAuthForm() {
               <FormField
                 control={form.control}
                 name="authMethod"
-                render={({ field }) => (
+                render={() => (
                   <FormItem className="space-y-3">
                     <FormLabel className="flex items-center gap-2 text-blue-100">
                       <Key className="h-4 w-4 text-blue-400" />
@@ -211,7 +209,6 @@ export function SSHAuthForm() {
                     </FormLabel>
                     <FormControl>
                       <Tabs
-                        defaultValue="password"
                         value={activeTab}
                         onValueChange={handleTabChange}
                         className="w-full"
