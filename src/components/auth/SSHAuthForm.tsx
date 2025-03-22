@@ -144,7 +144,7 @@ export function SSHAuthForm() {
                     <FormControl>
                       <Input
                         placeholder="e.g. 192.168.1.100 or example.com"
-                        className="eth-form-input bg-slate-800/50 border-slate-700/50 text-slate-100 focus:border-blue-500/50 focus:ring-blue-500/20"
+                        className="bg-slate-800/50 border-slate-700/50 text-slate-100 caret-blue-400 focus:border-blue-500/50 focus:ring-blue-500/20"
                         {...field}
                       />
                     </FormControl>
@@ -165,7 +165,7 @@ export function SSHAuthForm() {
                     <FormControl>
                       <Input
                         type="number"
-                        className="eth-form-input bg-slate-800/50 border-slate-700/50 text-slate-100 focus:border-blue-500/50 focus:ring-blue-500/20"
+                        className="bg-slate-800/50 border-slate-700/50 text-slate-100 caret-blue-400 focus:border-blue-500/50 focus:ring-blue-500/20"
                         {...field}
                       />
                     </FormControl>
@@ -189,7 +189,7 @@ export function SSHAuthForm() {
                     <FormControl>
                       <Input
                         placeholder="e.g. root or ubuntu"
-                        className="eth-form-input bg-slate-800/50 border-slate-700/50 text-slate-100 focus:border-blue-500/50 focus:ring-blue-500/20"
+                        className="bg-slate-800/50 border-slate-700/50 text-slate-100 caret-blue-400 focus:border-blue-500/50 focus:ring-blue-500/20"
                         {...field}
                       />
                     </FormControl>
@@ -240,7 +240,7 @@ export function SSHAuthForm() {
                                   <FormControl>
                                     <Input
                                       type="password"
-                                      className="eth-form-input bg-slate-800/50 border-slate-700/50 text-slate-100 focus:border-blue-500/50 focus:ring-blue-500/20"
+                                      className="bg-slate-800/50 border-slate-700/50 text-slate-100 caret-blue-400 focus:border-blue-500/50 focus:ring-blue-500/20"
                                       {...field}
                                     />
                                   </FormControl>
@@ -261,7 +261,7 @@ export function SSHAuthForm() {
                                   <FormControl>
                                     <Textarea
                                       placeholder="Paste your private key here"
-                                      className="eth-form-input min-h-[120px] bg-slate-800/50 border-slate-700/50 text-slate-100 focus:border-blue-500/50 focus:ring-blue-500/20"
+                                      className="min-h-[120px] bg-slate-800/50 border-slate-700/50 text-slate-100 caret-blue-400 focus:border-blue-500/50 focus:ring-blue-500/20"
                                       {...field}
                                     />
                                   </FormControl>
