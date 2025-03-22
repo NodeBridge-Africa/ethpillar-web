@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SSHAuthInput, sshAuthSchema } from "@/lib/schemas/auth";
 import Cookies from "js-cookie";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 
 import { Button } from "@/components/ui/button";
 import {
