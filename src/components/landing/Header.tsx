@@ -158,10 +158,10 @@ export const Header = () => {
             ))}
 
             <Link
-              href="/dashboard"
+              href="/auth"
               className="ml-4 px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all rounded-lg text-white font-medium shadow-md hover:shadow-lg hover:shadow-blue-500/20"
             >
-              Get Started
+              Connect
             </Link>
           </nav>
 
