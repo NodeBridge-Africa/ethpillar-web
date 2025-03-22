@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Terminal, Shield } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
@@ -40,11 +43,10 @@ export const Hero = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/dashboard"
+                href="/auth"
                 className="group flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium rounded-lg text-center transition-all shadow-md hover:shadow-lg hover:shadow-blue-500/20"
               >
-                Get Started
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                Connect to Server
               </Link>
 
               <Link

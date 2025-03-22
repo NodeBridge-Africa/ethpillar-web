@@ -8,6 +8,8 @@ import { CTA } from "@/components/landing/CTA";
 import { Footer } from "@/components/landing/Footer";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 // Add particlesJS type definition
 declare global {
@@ -27,6 +29,7 @@ export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [particlesLoaded, setParticlesLoaded] = useState(false);
   const mainRef = useRef(null);
+  const router = useRouter();
   const { scrollYProgress } = useScroll({
     target: mainRef,
     offset: ["start start", "end end"],
@@ -35,6 +38,18 @@ export default function Home() {
   // Parallax effect values
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const patternOpacity = useTransform(scrollYProgress, [0, 0.2], [0.08, 0.04]);
+
+  // Check if user is already authenticated
+  useEffect(() => {
+    // Only run this on the client side
+    if (typeof window !== "undefined") {
+      const hasSession =
+        Cookies.get("sshSessionId") || localStorage.getItem("sshSessionId");
+      if (hasSession) {
+        router.push("/dashboard");
+      }
+    }
+  }, [router]);
 
   useEffect(() => {
     setIsLoaded(true);
