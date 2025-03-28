@@ -8,12 +8,14 @@
 
 # testing
 /coverage
-/docs
-.cursorrules
+
 # next.js
 /.next/
 /out/
-
+/docs/
+/memory-bank/
+/EthPillar/
+.cursorrules
 # production
 /build
 
