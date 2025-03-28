@@ -33,9 +33,17 @@ export async function POST(req: NextRequest) {
     apiResponse.cookies.set("ssh_session", sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       path: "/",
-      maxAge: 10200, // 2 hour
+      maxAge: 10200, // 2 hour 50 seconds (in seconds)
+    });
+
+    apiResponse.cookies.set("ssh_session_ws", sessionId, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 10200,
     });
 
     return apiResponse;
