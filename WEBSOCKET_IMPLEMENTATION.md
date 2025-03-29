@@ -2,7 +2,7 @@
 
 ## Overview
 
-We've restructured the WebSocket implementation to use a separate, dedicated WebSocket server instead of integrating it directly with the Next.js application. This approach is more suitable for deploying the Next.js application on serverless platforms like Vercel.
+We've implemented a dedicated WebSocket server for EthPillar instead of integrating it directly with the Next.js application. This approach enables reliable real-time updates even when deploying the Next.js application on serverless platforms like Vercel.
 
 ## Project Structure
 
@@ -10,18 +10,23 @@ We've restructured the WebSocket implementation to use a separate, dedicated Web
 
    - Main frontend application
    - API routes for SSH connections and commands
-   - Uses WebSocket client to connect to the WebSocket server
+   - Dashboard UI components with real-time updates
+   - Custom hooks for WebSocket integration
 
 2. **WebSocket Server**
    - Dedicated Node.js server using Socket.IO
    - Handles real-time communication between the frontend and SSH servers
    - Manages SSH connections and streaming data
+   - Provides authentication via SSH session tokens
 
 ## Components
 
 ### Next.js Application
 
-- `src/hooks/useWebSocket.ts`: Client-side hook for connecting to the WebSocket server
+- `src/hooks/useWebSocket.ts`: Client-side hook for connecting to the WebSocket server with authentication and reconnection logic
+- `src/hooks/useNodeStatus.ts`: Hook for subscribing to and displaying node status updates
+- `src/hooks/useClientLogs.ts`: Hook for streaming and displaying service logs
+- `src/components/dashboard/`: Directory containing dashboard components that use WebSocket data
 - `.env`: Contains `NEXT_PUBLIC_WS_URL` to connect to the WebSocket server
 
 ### WebSocket Server
@@ -31,13 +36,49 @@ We've restructured the WebSocket implementation to use a separate, dedicated Web
 - `ethpillar-ws-server/src/connectionManager.ts`: Manages SSH connections and Redis sessions
 - `ethpillar-ws-server/src/sshHelpers.ts`: Helper functions for SSH operations
 
+## Dashboard Components Using WebSockets
+
+- `Header.tsx`: Displays connection status with real-time updates
+- `ConnectionCard.tsx`: Shows detailed connection information
+- `NodeStatusCard.tsx`: Displays service status with live updates
+- `LogViewerCard.tsx`: Streams and displays service logs in real-time
+- `ErrorAlert.tsx`: Shows WebSocket connection errors with reconnect option
+
+## WebSocket Hook Implementation
+
+The `useWebSocket` hook provides:
+
+- Connection management with automatic reconnection
+- Authentication with the WebSocket server
+- Event subscription system
+- Error handling and recovery
+
+The custom hooks `useNodeStatus` and `useClientLogs` build on top of `useWebSocket` to provide specific functionality for their use cases.
+
 ## Flow of Operation
 
 1. User authenticates through the Next.js app, which sets an `ssh_session` cookie
 2. The Next.js app connects to the WebSocket server sending the cookie
 3. WebSocket server verifies the session token with Redis
-4. User subscribes to logs or status updates through the WebSocket connection
-5. WebSocket server streams data from SSH connections back to the frontend
+4. Dashboard components display real-time data:
+   - Service status updates via the `useNodeStatus` hook
+   - Service log streaming via the `useClientLogs` hook
+5. User can interact with services and view logs in real-time
+
+## Data Flow Patterns
+
+1. **Status Updates Flow**:
+
+   - Client subscribes to status updates via `useNodeStatus` hook
+   - Server polls services at regular intervals
+   - Updates are sent to the client through WebSocket
+   - `NodeStatusCard` component displays the current status
+
+2. **Log Streaming Flow**:
+   - User selects a service in the `LogViewerCard`
+   - Client subscribes to logs for that service via `useClientLogs` hook
+   - Server streams logs in real-time through WebSocket
+   - Log entries are parsed and displayed in the UI
 
 ## Testing the Implementation
 
@@ -45,40 +86,46 @@ We've restructured the WebSocket implementation to use a separate, dedicated Web
 
 ```bash
 cd ethpillar-ws-server
-npm install # or bun install
-npm run dev # or bun run dev
+bun install
+bun dev
 ```
 
 ### Start the Next.js Application
 
 ```bash
 cd .. # Go back to the main project directory
-npm run dev # or bun run dev
+bun dev
 ```
 
 ### Test WebSocket Connection
 
 1. Login to the EthPillar application
-2. Navigate to a page that uses WebSocket (like logs or status)
-3. Check the browser console for WebSocket connection messages
-4. Check the WebSocket server terminal for connection and authentication logs
+2. Navigate to the dashboard
+3. Check for the connection status indicator in the header
+4. Select a service in the log viewer to see real-time logs
+5. Monitor the node status card for live updates
 
 ## Debugging
 
 If you encounter issues:
 
-1. **Check WebSocket Server Logs**
+1. **Check Dashboard Connection Status**
+
+   - The header shows the current connection state
+   - The `ErrorAlert` component displays detailed connection errors
+
+2. **Check WebSocket Server Logs**
 
    - Connection attempts
    - Authentication errors
    - SSH connection issues
 
-2. **Check Redis Connection**
+3. **Check Redis Connection**
 
    - Ensure Redis is accessible from both the Next.js app and WebSocket server
    - Verify session tokens are correctly stored
 
-3. **Check Browser Console**
+4. **Check Browser Console**
    - WebSocket connection errors
    - Authentication issues
 
@@ -92,3 +139,11 @@ If you encounter issues:
    - DigitalOcean App Platform
 3. Update the `NEXT_PUBLIC_WS_URL` in your Next.js environment to point to the deployed WebSocket server
 4. Configure CORS by setting the `FRONTEND_URL` on the WebSocket server to match your deployed Next.js app URL
+
+## Security Considerations
+
+1. **Authentication**: WebSocket connections require a valid SSH session token
+2. **CORS Protection**: The WebSocket server only accepts connections from the specified frontend URL
+3. **Timeout Management**: Connections and SSH sessions have appropriate timeout settings
+4. **Error Handling**: Robust error handling prevents information leakage
+5. **Session Token Storage**: Session tokens are stored securely in cookies and localStorage
