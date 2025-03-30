@@ -8,7 +8,7 @@ import {
   Server,
   Database,
   ShieldCheck,
-  Zap,
+  Rocket,
   Settings,
   Wrench,
   Puzzle,
@@ -60,7 +60,7 @@ export function NavigationMenu() {
       {
         label: "MEV-Boost",
         href: "/dashboard/mevboost",
-        icon: Zap,
+        icon: Rocket,
         serviceName: "mevboost",
         hideIfStatus: ["not_installed"],
       },
