@@ -13,8 +13,8 @@
 /.next/
 /out/
 /docs/
-/memory-bank/
-/EthPillar
+# /memory-bank/
+# /EthPillar
 .cursorrules
 
 # production
